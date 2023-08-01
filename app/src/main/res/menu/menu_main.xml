@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item
+        android:id="@+id/icHome"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+    <item
+        android:id="@+id/icGioiThieu"
+        android:title="Giới thiệu"
+        android:icon="@drawable/ic_grading"/>
+    <group android:checkableBehavior="single">
+        <item android:title="Khác">
+            <menu>
+                <item
+                    android:id="@+id/icKhenThuong"
+                    android:title="Khen thưởng/ Kỷ luật"
+                    android:icon="@drawable/ic_library_add_check"/>
+                <item
+                    android:id="@+id/icSMS"
+                    android:title="SMS"
+                    android:icon="@drawable/ic_help_outline"/>
+                <item
+                    android:id="@+id/icSetting"
+                    android:title="Setting"
+                    android:icon="@drawable/ic_settings"/>
+                <item
+                    android:id="@+id/icQuestion"
+                    android:title="Câu hỏi thường gặp"
+                    android:icon="@drawable/ic_sms"/>
+            </menu>
+        </item>
+    </group>
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/icLogOut"
+                android:title="Logout"
+                android:icon="@drawable/ic_logout"/>
+        </menu>
+    </item>
+</menu>
