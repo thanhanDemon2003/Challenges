@@ -3,32 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/notificationBottom"
-        android:iconTint="@color/black"
-        android:icon="@drawable/ic_notifications"
+        android:iconTint="#F85A1A"
+        android:icon="@drawable/notifications_og"
         android:title="Thông báo"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/scheduleBottom"
-        android:iconTint="@color/black"
-        android:icon="@drawable/ic_schedule"
+        android:iconTint="#F85A1A"
+        android:icon="@drawable/schedule_og"
         android:title="Lịch học"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/qrScanBottom"
-        android:iconTint="@color/black"
-        android:icon="@drawable/ic_qr_code_scanner"
+        android:iconTint="#F85A1A"
+        android:icon="@drawable/scanner_og"
         android:title="QR Scan"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/scoreBottom"
-        android:iconTint="@color/black"
-        android:icon="@drawable/ic_credit_score"
+        android:iconTint="#F85A1A"
+        android:icon="@drawable/score_og"
         android:title="Bảng điểm"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/libraryBottom"
-        android:iconTint="@color/black"
-        android:icon="@drawable/ic_local_library"
+        android:iconTint="#F85A1A"
+        android:icon="@drawable/library_og"
         android:title="Library"
         app:showAsAction="ifRoom"/>
 </menu>

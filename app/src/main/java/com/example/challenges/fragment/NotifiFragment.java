@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.challenges.ApiInterface;
@@ -16,7 +17,9 @@ import com.example.challenges.R;
 import com.example.challenges.adapter.NotificationAdapter;
 import com.example.challenges.model.Notification;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,6 +38,17 @@ public class NotifiFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_notifi, container, false);
 
+        TextView tvTime = rootView.findViewById(R.id.tvTime);
+        // Lấy thời gian hiện tại
+        Date currentTime = new Date();
+
+        // Định dạng thời gian theo định dạng mong muốn (ví dụ: "HH:mm:ss")
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String formattedTime = sdf.format(currentTime);
+
+        // Hiển thị thời gian trên TextView
+        tvTime.setText(formattedTime);
+
         rcvNotification = rootView.findViewById(R.id.rcvNotification);
         rcvNotification.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -43,7 +57,7 @@ public class NotifiFragment extends Fragment {
 
         //Khởi tạo retrofit
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.112.116/challenges/")
+                .baseUrl("http://192.168.5.117/challenges/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

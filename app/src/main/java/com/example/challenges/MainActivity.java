@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     GoogleSignInClient mGoogleSignInClient;
     DrawerLayout drawerLayout;
     BottomNavigationView bottomNavigationView;

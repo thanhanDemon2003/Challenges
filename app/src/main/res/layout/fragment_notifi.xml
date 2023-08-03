@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.NotifiFragment">
+    tools:context=".fragment.NotifiFragment"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="65dp"
+            android:id="@+id/tvTime"
+            android:text="12:00 PM"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/border"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="65dp"
+            android:id="@+id/tvT"
+            android:text="Đừng lo rớt môn đã có sale of"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/border"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"/>
+
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvNotification"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"/>
 
-</FrameLayout>
+
+</LinearLayout>
