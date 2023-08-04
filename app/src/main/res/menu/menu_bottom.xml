@@ -23,7 +23,7 @@
         android:id="@+id/scoreBottom"
         android:iconTint="#F85A1A"
         android:icon="@drawable/score_og"
-        android:title="Bảng điểm"
+        android:title="Lịch Thi"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/libraryBottom"
