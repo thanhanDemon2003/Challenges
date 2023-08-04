@@ -68,12 +68,9 @@ public class PaymentCard extends Fragment {
                     public void run() {
                         ThanhToanThanhCongFragment fragment = new ThanhToanThanhCongFragment();
                         fragment.show(getParentFragmentManager(), "thanh_toan_thanh_cong");
-
                         getParentFragmentManager().popBackStack();
-                        Intent intent = new Intent(requireContext(), MainActivity.class);
-                        startActivity(intent);
                     }
-                }, 5000);
+                }, 10000);
             }
         });
 

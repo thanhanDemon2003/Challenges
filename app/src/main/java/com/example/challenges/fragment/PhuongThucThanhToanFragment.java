@@ -24,13 +24,27 @@ public class PhuongThucThanhToanFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_phuong_thuc_thanh_toan, container, false);
 
         LinearLayout cardPayment = view.findViewById(R.id.cardPayment);
-
         cardPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PaymentCard paymentCard = new PaymentCard();
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                 transaction.replace(android.R.id.content, paymentCard)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        // Lấy tham chiếu đến LinearLayout chứa mục "Bank"
+        LinearLayout bankLayout = view.findViewById(R.id.bank);
+
+        // Thiết lập sự kiện click cho mục "Bank"
+        bankLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Thực hiện chuyển đổi fragment sang BankFragment
+                BankFragment bankFragment = new BankFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(android.R.id.content, bankFragment)
                         .addToBackStack(null)
                         .commit();
             }

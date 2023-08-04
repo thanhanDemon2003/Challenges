@@ -1,22 +1,21 @@
 package com.example.challenges.fragment;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.challenges.MainActivity;
 import com.example.challenges.R;
 
-public class ThanhToanThanhCongFragment extends DialogFragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link BankFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class BankFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +26,7 @@ public class ThanhToanThanhCongFragment extends DialogFragment {
     private String mParam1;
     private String mParam2;
 
-    public ThanhToanThanhCongFragment() {
+    public BankFragment() {
         // Required empty public constructor
     }
 
@@ -37,11 +36,11 @@ public class ThanhToanThanhCongFragment extends DialogFragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ThanhToanThanhCongFragment.
+     * @return A new instance of fragment BankFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ThanhToanThanhCongFragment newInstance(String param1, String param2) {
-        ThanhToanThanhCongFragment fragment = new ThanhToanThanhCongFragment();
+    public static BankFragment newInstance(String param1, String param2) {
+        BankFragment fragment = new BankFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,27 +60,7 @@ public class ThanhToanThanhCongFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_bank, container, false);
     }
-
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Thanh toán thành công")
-                .setMessage("Vui Lòng Kiểm Tra Email Để Lấy Hóa Đơn!")
-                .setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dismiss();
-                    }
-                });
-        return builder.create();
-    }
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        Intent intent = new Intent(requireContext(), MainActivity.class);
-        startActivity(intent);
-    }
-
 }

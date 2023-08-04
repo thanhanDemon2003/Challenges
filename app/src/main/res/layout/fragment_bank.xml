@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+   >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Thanh toán"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="50dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tài khoản"
+            android:textSize="20sp"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text=" 1231-2312-3123-1231"
+            android:background="@drawable/boder_vuong"
+            android:textSize="25sp"
+
+            android:gravity="center_vertical"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Tên thụ hưởng"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text=" Tap Boan FPT Education"
+            android:background="@drawable/boder_vuong"
+
+            android:gravity="center_vertical"
+
+            android:textSize="25sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số Tiền"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text=" 250.000VNĐ"
+
+            android:background="@drawable/boder_vuong"
+            android:textSize="25sp"
+            android:gravity="center_vertical"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+>
+
+        <TextView
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:text="Thời gian thanh toán"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="19:00"
+            android:textSize="15sp"
+            android:textColor="#FF9800"
+            android:textStyle="normal"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:text="Xác nhận"
+        android:textColor="@color/white"
+        android:background="@color/cam123"/>
+
+</LinearLayout>
