@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Hiển thị mặc định NotifiFragment
         NotifiFragment notifiFragment = new NotifiFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
