@@ -23,14 +23,14 @@
                 android:layout_height="wrap_content"
                 android:text="ca thi"
                 android:textSize="15dp"
-                android:textColor="#989898"/>
+                android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tvNgayThi"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="Ngày thi"
                 android:textSize="15dp"
-                android:textColor="#989898"
+                android:textColor="@color/black"
                 android:layout_marginLeft="20dp"/>
         </LinearLayout>
 

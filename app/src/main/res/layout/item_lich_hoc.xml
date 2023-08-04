@@ -24,14 +24,14 @@
                 android:layout_height="wrap_content"
                 android:text="ca học"
                 android:textSize="15dp"
-                android:textColor="#989898"/>
+                android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tvNgayHoc"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:text="Ngày học"
                 android:textSize="15dp"
-                android:textColor="#989898"
+                android:textColor="@color/black"
                 android:layout_marginLeft="20dp"/>
         </LinearLayout>
 
