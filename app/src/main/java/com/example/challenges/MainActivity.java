@@ -1,13 +1,5 @@
 package com.example.challenges;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -16,10 +8,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.challenges.adapter.NotificationAdapter;
@@ -38,7 +38,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     List<Notification> dataList;
     NotificationAdapter dataAdapter;
+    private SearchableFragment currentFragment;
 
 
     @Override
@@ -54,33 +54,49 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolBar = findViewById(R.id.toolBar);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Hiển thị mặc định NotifiFragment
+        NotifiFragment notifiFragment = new NotifiFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout,notifiFragment);
+        fragmentTransaction.commit();
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
                 if (item.getItemId() == R.id.notificationBottom){
+                    toolBar.setTitle("Thông báo");
                     fragment = new NotifiFragment();
                 } else if (item.getItemId() == R.id.scheduleBottom) {
+                    toolBar.setTitle("Lịch học");
                     fragment = new ScheduleFragment();
                 } else if (item.getItemId() == R.id.qrScanBottom) {
+                    toolBar.setTitle("QR Scan");
                     fragment = new DisplayQRContentFragment();
                 } else if (item.getItemId() == R.id.scoreBottom){
+                    toolBar.setTitle("Lịch Thi");
                     fragment = new ScoreFragment();
-                }else {
+                } else {
+                    toolBar.setTitle("Khác");
                     fragment = new LibraryFragment();
-
+                }
+                //Kiểm tra nếu Fragment đang hiển thị implement giao diện SearchableFragment
+                if (fragment instanceof SearchableFragment){
+                    currentFragment = (SearchableFragment) fragment;
+                }else {
+                    currentFragment = null;
                 }
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frameLayout,fragment).commit();
                 return true;
             }
         });
-
-        Toolbar toolBar = findViewById(R.id.toolBar);
-//        edtSearch = findViewById(R.id.edtSearch);
-        setSupportActionBar(toolBar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         drawerLayout = findViewById(R.id.drawerLayout);
         NavigationView navigationView = findViewById(R.id.navigationView);
@@ -123,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fr;
                 if (item.getItemId() == R.id.icLogOut){
                     mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -136,6 +153,12 @@ public class MainActivity extends AppCompatActivity {
                             finish();
                         }
                     });
+                } else if (item.getItemId() == R.id.icHome) {
+                    toolBar.setTitle("Home");
+                    fr = new NotifiFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fr).commit();
+                    bottomNavigationView.setSelectedItemId(R.id.notificationBottom);
+                    drawerLayout.close();
                 }
                 return true;
             }
@@ -153,37 +176,24 @@ public class MainActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) searchMenuItem.getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
-        //Set the query listener for handling search
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                filterData(query);
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                if (dataList != null){
-//                    filterData(newText);
-//                }
-//                return true;
-//            }
-//        });
+        //Lắng nghe sự kiện tìm kiếm và gửi yêu cầu tìm kiếm đến Fragment đang hiển thị
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (currentFragment != null){
+                    currentFragment.performSearch(query);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //không làm gì khi người dùng thay đổi nội dung
+                return false;
+            }
+        });
         return true;
     }
-
-//    private void filterData(String query) {
-//        if (dataList != null){
-//            List<Notification> filteredList = new ArrayList<>();
-//            for (Notification item : dataList){
-//                if (item.getTitle().toLowerCase().contains(query.toLowerCase())){
-//                    filteredList.add(item);
-//                }
-//            }
-//            dataAdapter.updateData(filteredList);
-//            dataAdapter.notifyDataSetChanged();
-//        }
-//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp"
+    android:orientation="vertical"
+    tools:context=".fragment.ThiLaiFragment"
+    android:background="@color/white">
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký thi lại"
+        android:layout_gravity="center"
+        android:textSize="22dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Môn thi"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="276dp"
+        android:layout_height="36dp"
+        android:text="ENT2115 - Tiếng anh 2.1"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ghi chú"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="276dp"
+        android:layout_height="127dp"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phí"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="276dp"
+        android:layout_height="36dp"
+        android:text="250.000 vnd"
+        android:background="@drawable/border"
+        android:gravity="center_vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/payManent"
+        android:layout_width="276dp"
+        android:layout_height="36dp"
+        android:text="Thanh toán"
+        android:background="@drawable/border1"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="63dp"
+        android:textColor="@color/white"
+        />
+
+</LinearLayout>

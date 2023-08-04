@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".fragment.LibraryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:id="@+id/btnThongTinSinhVien"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="Thông tin sinh viên"
+        android:background="@drawable/button_border"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:gravity="start|center_vertical"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btnDangKyHocLai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký học lại"
+        android:background="@drawable/button_border"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:gravity="start|center_vertical" />
+
+    <Button
+        android:id="@+id/btnUngHoGiangVien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ủng hộ giảng viên"
+        android:background="@drawable/button_border"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:gravity="start|center_vertical"/>
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rcvDangkyhoclai"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--        tools:listitem="@layout/item_dang_ky_hoc_lai"/>-->
+
+</LinearLayout>

@@ -17,7 +17,7 @@
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#4DFFC107"
+            android:background="#FF8C00"
             android:fitsSystemWindows="true"
             app:title="@null"/>
 <!--        <EditText-->
@@ -39,8 +39,6 @@
             android:layout_gravity="bottom"
 
             android:background="@android:color/transparent"
-            app:itemIconTint="@color/black"
-            app:itemTextColor="@color/black"
             app:labelVisibilityMode="selected"
             app:menu="@menu/menu_bottom"/>
     </LinearLayout>

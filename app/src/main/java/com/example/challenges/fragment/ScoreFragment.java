@@ -3,64 +3,109 @@ package com.example.challenges.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.challenges.ApiInterface;
 import com.example.challenges.R;
+import com.example.challenges.SearchableFragment;
+import com.example.challenges.adapter.LichThiAdapter;
+import com.example.challenges.model.LichThi;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ScoreFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ScoreFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class ScoreFragment extends Fragment implements SearchableFragment {
 
-    public ScoreFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ScoreFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ScoreFragment newInstance(String param1, String param2) {
-        ScoreFragment fragment = new ScoreFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private RecyclerView rcvLichThi;
+    private LichThiAdapter lichThiAdapter;
+    private List<LichThi> lichThiList;
+    private List<LichThi> filteredListLichThi; //ds lưu kết quả search
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        //Khởi tạo danh sách thông báo và danh sách kết quả search
+        lichThiList = new ArrayList<>();
+        filteredListLichThi = new ArrayList<>();
+        //Khởi tạo lichHocAdapter và đưa danh sách ban đầu vào RecyclerView
+        lichThiAdapter = new LichThiAdapter(lichThiList);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_score, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_score, container, false);
+
+        rcvLichThi = rootView.findViewById(R.id.rcvLichThi);
+        rcvLichThi.setLayoutManager(new LinearLayoutManager(getActivity()));
+        lichThiAdapter = new LichThiAdapter(lichThiList);
+        rcvLichThi.setAdapter(lichThiAdapter);
+
+        //.baseUrl("https://demondev.games/api/")
+        //Khởi tạo retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+
+                .baseUrl("http://172.16.66.147/challenges/lich_thi/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        //Gọi API và cập nhật dữ liệu vào adapter khi nhận được kết quả
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        Call<List<LichThi>> call = apiInterface.getLichThi();
+        call.enqueue(new Callback<List<LichThi>>() {
+            @Override
+            public void onResponse(Call<List<LichThi>> call, Response<List<LichThi>> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    List<LichThi> lichThis = response.body();
+                    lichThiList.clear();
+                    lichThiList.addAll(lichThis);
+                    lichThiAdapter.notifyDataSetChanged();
+                }else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<LichThi>> call, Throwable t) {
+
+            }
+        });
+        return rootView;
+    }
+
+    @Override
+    public void performSearch(String query) {
+        if (TextUtils.isEmpty(query)){
+            filteredListLichThi.addAll(lichThiList);
+        }else {
+            filteredListLichThi.clear();
+            //duyệt ds lịch học và thêm vào filteredListLichHoc các lịch học phù hợp với từ khoá
+            for (LichThi lichThi : lichThiList){
+                if (lichThi.getLop().toLowerCase().contains(query.toLowerCase())
+                        || lichThi.getPhong().toLowerCase().contains(query.toLowerCase())
+                        || lichThi.getCa_thi().toLowerCase().contains(query.toLowerCase())
+                        || lichThi.getNgay().toLowerCase().contains(query.toLowerCase())
+                        || lichThi.getMa_mon().toLowerCase().contains(query.toLowerCase())
+                        || lichThi.getTen_mon().toLowerCase().contains(query.toLowerCase())
+                        || lichThi.getDot_thi().toLowerCase().contains(query.toLowerCase())
+                        || lichThi.getGv1().toLowerCase().contains(query.toLowerCase())){
+                    filteredListLichThi.add(lichThi);
+                }
+            }
+        }
+        lichThiAdapter.updateDataLichThi(filteredListLichThi);
+        lichThiAdapter.notifyDataSetChanged();
     }
 }

@@ -6,35 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
+    android:background="#FF8C00"
     tools:context=".LoginActivity">
     <ImageView
+        android:layout_marginTop="100dp"
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:src="@drawable/fpt_polytechnic"
+        android:src="@drawable/polybee"
         android:layout_gravity="center"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My"
-            android:textSize="50dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:fontFamily="@font/calibri"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="@font/calibri"
-            android:text="FPL"
-            android:textSize="60dp"
-            android:textColor="#F99602"
-            android:textStyle="bold"/>
-    </LinearLayout>
+
     <EditText
         android:id="@+id/edtCoSoSelect"
         android:layout_width="300dp"

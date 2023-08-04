@@ -19,6 +19,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public NotificationAdapter(List<Notification> notifications) {
         this.notifications = notifications;
     }
+
+    //---
+    private OnItemClickListener onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.onItemClickListener = listener;
+    }
+    public interface OnItemClickListener{
+        void onItemClick(Notification notification);
+    }
+    //-----
     public void updateData(List<Notification> newData){
         notifications.clear();
         notifications.addAll(newData);
@@ -29,12 +39,25 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public NotificationAdapter.NotificationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notifi,parent,false);
+
+        //thêm sự kiện click vào itemView
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = (int) v.getTag();
+                if (position != RecyclerView.NO_POSITION && onItemClickListener != null){
+                    onItemClickListener.onItemClick(notifications.get(position));
+                }
+            }
+        });
         return new NotificationViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NotificationAdapter.NotificationViewHolder holder, int position) {
-        Notification notification = notifications.get(position);
+//        Notification notification = notifications.get(position);
+        Notification notification = notifications.get(holder.getAdapterPosition());
+        holder.itemView.setTag(holder.getAdapterPosition()); //lưu vị trí item vào tag của itemView
         holder.tvTitle.setText(notification.getTitle());
         holder.tvAuthor.setText(notification.getAuthor());
         holder.tvDate.setText(notification.getDate());

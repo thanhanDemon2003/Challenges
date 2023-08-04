@@ -3,64 +3,107 @@ package com.example.challenges.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.challenges.ApiInterface;
 import com.example.challenges.R;
+import com.example.challenges.SearchableFragment;
+import com.example.challenges.adapter.LichHocAdapter;
+import com.example.challenges.model.LichHoc;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ScheduleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ScheduleFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class ScheduleFragment extends Fragment implements SearchableFragment {
 
-    public ScheduleFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ScheduleFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ScheduleFragment newInstance(String param1, String param2) {
-        ScheduleFragment fragment = new ScheduleFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private RecyclerView rcvLichHoc;
+    private LichHocAdapter lichHocAdapter;
+    private List<LichHoc> lichHocList;
+    private List<LichHoc> filteredListLichHoc; //ds lưu kết quả search
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        //Khởi tạo danh sách thông báo và danh sách kết quả search
+        lichHocList = new ArrayList<>();
+        filteredListLichHoc = new ArrayList<>();
+        //Khởi tạo lichHocAdapter và đưa danh sách ban đầu vào RecyclerView
+        lichHocAdapter = new LichHocAdapter(lichHocList);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        rcvLichHoc = rootView.findViewById(R.id.rcvLichHoc);
+        rcvLichHoc.setLayoutManager(new LinearLayoutManager(getActivity()));
+        lichHocAdapter = new LichHocAdapter(lichHocList);
+        rcvLichHoc.setAdapter(lichHocAdapter);
+
+        //
+        //.baseUrl("https://demondev.games/api/")
+        //Khởi tạo retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+
+                .baseUrl("http://172.16.66.147/challenges/lich_hoc/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        //Gọi API và cập nhật dữ liệu vào adapter khi nhận được kết quả
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        Call<List<LichHoc>> call = apiInterface.getLichHoc();
+        call.enqueue(new Callback<List<LichHoc>>() {
+            @Override
+            public void onResponse(Call<List<LichHoc>> call, Response<List<LichHoc>> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    List<LichHoc> lichHocs = response.body();
+                    lichHocList.clear();
+                    lichHocList.addAll(lichHocs);
+                    lichHocAdapter.notifyDataSetChanged();
+                }else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<LichHoc>> call, Throwable t) {
+
+            }
+        });
+        return rootView;
+    }
+
+    @Override
+    public void performSearch(String query) {
+        if (TextUtils.isEmpty(query)){
+            filteredListLichHoc.addAll(lichHocList);
+        }else {
+            //duyệt ds lịch học và thêm vào filteredListLichHoc các lịch học phù hợp với từ khoá
+            for (LichHoc lichHoc : lichHocList){
+                if (lichHoc.getPhong().toLowerCase().contains(query.toLowerCase())
+                        || lichHoc.getCa_hoc().toLowerCase().contains(query.toLowerCase())
+                        || lichHoc.getNgay().toLowerCase().contains(query.toLowerCase())
+                        || lichHoc.getMa_mon().toLowerCase().contains(query.toLowerCase())
+                        || lichHoc.getTen_mon().toLowerCase().contains(query.toLowerCase())
+                        || lichHoc.getTen_giang_vien().toLowerCase().contains(query.toLowerCase())){
+                    filteredListLichHoc.add(lichHoc);
+                }
+            }
+        }
+        lichHocAdapter.updateDataLichHoc(filteredListLichHoc);
+        lichHocAdapter.notifyDataSetChanged();
     }
 }

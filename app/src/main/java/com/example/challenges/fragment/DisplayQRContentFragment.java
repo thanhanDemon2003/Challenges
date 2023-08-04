@@ -44,7 +44,7 @@ public class DisplayQRContentFragment extends Fragment implements ResultHandler 
             public void onClick(View v) {
                 //kiểm tra quyền truy cập camera
                 if (ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED){
+                        != PackageManager.PERMISSION_GRANTED){
                     //nếu chưa có quyền thì yêu cầu quyền truy cập
                     ActivityCompat.requestPermissions(requireActivity(),
                             new String[]{Manifest.permission.CAMERA},
@@ -67,7 +67,7 @@ public class DisplayQRContentFragment extends Fragment implements ResultHandler 
         });
 
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-        != PackageManager.PERMISSION_GRANTED){
+                != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(requireActivity(),
                     new String[]{Manifest.permission.CAMERA},
                     CAMERA_PERMISSION_REQUEST_CODE);
