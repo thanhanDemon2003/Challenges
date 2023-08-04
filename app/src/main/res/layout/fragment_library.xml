@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragment.LibraryFragment">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+
         android:id="@+id/btnThongTinSinhVien"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,9 +15,10 @@
         android:background="@drawable/button_border"
         android:layout_marginTop="10dp"
         android:padding="8dp"
-        android:gravity="start|center_vertical"/>
+        android:gravity="start|center_vertical"
+        android:textColor="@color/white"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDangKyHocLai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,9 +26,12 @@
         android:background="@drawable/button_border"
         android:layout_marginTop="10dp"
         android:padding="8dp"
-        android:gravity="start|center_vertical" />
+        android:gravity="start|center_vertical"
+        android:textColor="@color/white"/>
+        />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:textColor="@color/white"
         android:id="@+id/btnUngHoGiangVien"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,12 +41,6 @@
         android:padding="8dp"
         android:gravity="start|center_vertical"/>
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rcvDangkyhoclai"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--        tools:listitem="@layout/item_dang_ky_hoc_lai"/>-->
+
 
 </LinearLayout>

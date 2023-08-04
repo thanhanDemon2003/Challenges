@@ -39,6 +39,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/MomoPayment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -53,7 +54,7 @@
             android:layout_width="336dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Viettelmoney"
+            android:text="Momo"
             android:textSize="22dp" />
     </LinearLayout>
 
@@ -73,7 +74,7 @@
             android:layout_width="343dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Bank"
+            android:text="  Bank"
             android:textSize="22dp" />
     </LinearLayout>
 

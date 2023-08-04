@@ -23,13 +23,6 @@ import java.util.List;
 
 public class LibraryFragment extends Fragment {
 
-    // code dang ky học lại trong này
-
-    private RecyclerView rcvNotification;
-    private DangKyHocLaiAdapter dangKyHocLaiAdapter;
-    private List<DangKyHocLai> dangKyHocLaiList;
-    private List<Notification> filteredListHocLai; //ds lưu kết quả tìm kiếm
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,15 +33,13 @@ public class LibraryFragment extends Fragment {
         btnDangKyHocLai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ThiLaiFragment thiLaiFragment = new ThiLaiFragment();
-                FragmentManager fragmentManager = getParentFragmentManager();
-                fragmentManager.beginTransaction()
-                        .add(android.R.id.content, thiLaiFragment)
+                ListMonHocFragment listMonHocFragment = new ListMonHocFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(android.R.id.content, listMonHocFragment)
                         .addToBackStack(null)
                         .commit();
             }
         });
-
 
         return view;
     }

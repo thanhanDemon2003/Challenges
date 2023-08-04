@@ -58,7 +58,7 @@ public class NotifiFragment extends Fragment implements SearchableFragment {
         //Khởi tạo retrofit
         Retrofit retrofit = new Retrofit.Builder()
 
-                .baseUrl("http://172.16.66.147/challenges/Thong_Bao/")
+                .baseUrl("http://192.168.1.132/challenges/Thong_Bao/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

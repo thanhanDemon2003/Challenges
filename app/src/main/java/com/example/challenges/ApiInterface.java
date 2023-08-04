@@ -1,5 +1,6 @@
 package com.example.challenges;
 
+import com.example.challenges.model.DangKyHocLai;
 import com.example.challenges.model.LichHoc;
 import com.example.challenges.model.LichThi;
 import com.example.challenges.model.Notification;
@@ -27,5 +28,7 @@ public interface ApiInterface {
     Call<List<LichThi>> getLichThi();
 
     @GET("get_thilai.php")
-    Call<List<LichThi>> getThilai();
+    Call<List<DangKyHocLai>> getThilai();
+
+    Call<Void> updateThilaiApi(int i, int i1);
 }
